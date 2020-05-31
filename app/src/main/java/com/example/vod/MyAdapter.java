@@ -3,11 +3,13 @@ package com.example.vod;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +27,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<ListVideosQuery.Item> mData = new ArrayList<>();;
     private LayoutInflater mInflater;
+    private static final String TAG = MyAdapter.class.getSimpleName();
 
 
     // data is passed into the constructor
@@ -57,7 +60,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // stores and recycles views as they are scrolled off screen
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView txt_title;
         TextView txt_genre;
         ImageView image_view;
@@ -67,6 +70,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             txt_title = itemView.findViewById(R.id.txt_title);
             txt_genre = itemView.findViewById(R.id.txt_genre);
             image_view = itemView.findViewById(R.id.image_view);
+            itemView.setOnClickListener(this);
         }
 
         void bindData(ListVideosQuery.Item item) {
@@ -76,6 +80,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 Picasso.get().load(item.thumbNailsUrls().get(0)).into(image_view);
             }
 
+        }
+        @Override
+        public void onClick(View v) {
+            Log.d(TAG, "Clicked");
         }
     }
 }
