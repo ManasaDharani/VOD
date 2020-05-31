@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-vod-dev-104308-authRole",
+            "UnauthRoleArn": "arn:aws:iam::151810353202:role/amplify-vod-dev-104308-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::151810353202:role/amplify-vod-dev-104308-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-vod-dev-104308-deployment",
+            "UnauthRoleName": "amplify-vod-dev-104308-unauthRole",
+            "StackName": "amplify-vod-dev-104308",
+            "StackId": "arn:aws:cloudformation:us-east-1:151810353202:stack/amplify-vod-dev-104308/b8998800-a1ba-11ea-a212-1214c28caebf",
+            "AmplifyAppId": "d1bokrdwadpbk1"
+        },
+        "categories": {
+            "auth": {
+                "vodbfad5088": {}
+            }
+        }
+    }
+}
