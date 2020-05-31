@@ -52,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
                 Log.i(TAG, mVideos.get(position).id());
+                String title = mVideos.get(position).title();
+                String genre = mVideos.get(position).genre();
+                String hlsUrl = mVideos.get(position).hlsUrl();
+                Intent playVideoIntent = new Intent(MainActivity.this, VideoPlayerActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("EXTRA_TITLE", title);
+                extras.putString("EXTRA_GENRE", genre);
+                extras.putString("EXTRA_URL", hlsUrl);
+                playVideoIntent.putExtras(extras);
+                startActivity(playVideoIntent);
             }
         };
 
