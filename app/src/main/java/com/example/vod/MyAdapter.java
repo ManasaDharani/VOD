@@ -28,18 +28,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<ListVideosQuery.Item> mData = new ArrayList<>();;
     private LayoutInflater mInflater;
     private static final String TAG = MyAdapter.class.getSimpleName();
+    private RecyclerViewClickListener mListener;
+
 
 
     // data is passed into the constructor
-    MyAdapter(Context context) {
+    MyAdapter(Context context, RecyclerViewClickListener listener) {
         this.mInflater = LayoutInflater.from(context);
+        mListener = listener;
     }
 
     // inflates the row layout from xml when needed
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_row, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, mListener);
     }
 
     // binds the data to the TextView in each row
@@ -64,12 +67,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         TextView txt_title;
         TextView txt_genre;
         ImageView image_view;
+        private RecyclerViewClickListener mListener;
 
-        ViewHolder(View itemView) {
+        ViewHolder(View itemView, RecyclerViewClickListener listener) {
             super(itemView);
             txt_title = itemView.findViewById(R.id.txt_title);
             txt_genre = itemView.findViewById(R.id.txt_genre);
             image_view = itemView.findViewById(R.id.image_view);
+            mListener = listener;
             itemView.setOnClickListener(this);
         }
 
@@ -84,6 +89,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "Clicked");
+            mListener.onClick(v, getAdapterPosition());
+
         }
+    }
+    public interface RecyclerViewClickListener {
+
+        void onClick(View view, int position);
     }
 }

@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     MyAdapter mAdapter;
-    private ArrayList<ListVideosQuery.Item> mPets;
+    private ArrayList<ListVideosQuery.Item> mVideos;
     private final String TAG = MainActivity.class.getSimpleName();
 
 
@@ -47,8 +48,15 @@ public class MainActivity extends AppCompatActivity {
         // use a linear layout manager
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        MyAdapter.RecyclerViewClickListener mListener = new MyAdapter.RecyclerViewClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Log.i(TAG, mVideos.get(position).id());
+            }
+        };
+
         // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(this);
+        mAdapter = new MyAdapter(this, mListener);
         mRecyclerView.setAdapter(mAdapter);
 
         ClientFactory.init(this);
@@ -89,14 +97,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onResponse(@Nonnull Response<ListVideosQuery.Data> response) {
 
-            mPets = new ArrayList<>(response.data().listVideos().items());
+            mVideos = new ArrayList<>(response.data().listVideos().items());
 
-            Log.i(TAG, "Retrieved list items: " + mPets.toString());
+            Log.i(TAG, "Retrieved list items: " + mVideos.toString());
 
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mAdapter.setItems(mPets);
+                    mAdapter.setItems(mVideos);
                     mAdapter.notifyDataSetChanged();
                 }
             });
