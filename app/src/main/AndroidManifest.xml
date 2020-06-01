@@ -16,7 +16,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VideoPlayerActivity"></activity>
+        <activity
+            android:name=".Activity3"
+            android:label="@string/action_activity3">
+
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/action_settings" />
+        <activity android:name=".VideoPlayerActivity" />
         <activity android:name=".UploadVideoActivity" />
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />

@@ -14,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -93,6 +94,29 @@ public class HomeActivity extends AppCompatActivity {
                 pullToRefresh.setRefreshing(false);
             }
         });
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.action_home:
+                    break;
+                case R.id.action_settings:
+                    Intent a = new Intent(HomeActivity.this,SettingsActivity.class);
+                    startActivity(a);
+                    overridePendingTransition(0,0);
+                    break;
+                case R.id.action_activity3:
+                    Intent b = new Intent(HomeActivity.this,Activity3.class);
+                    startActivity(b);
+                    overridePendingTransition(0,0);
+                    break;
+            }
+            return true;
+        });
+        MenuItem item = navigation.getMenu().findItem(R.id.action_home);
+        item.setChecked(true);
+
+
     }
     @Override
     public void onResume() {
@@ -116,12 +140,9 @@ public class HomeActivity extends AppCompatActivity {
 
             Log.i(TAG, "Retrieved list items: " + mVideos.toString());
 
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mAdapter.setItems(mVideos);
-                    mAdapter.notifyDataSetChanged();
-                }
+            runOnUiThread(() -> {
+                mAdapter.setItems(mVideos);
+                mAdapter.notifyDataSetChanged();
             });
         }
 
@@ -130,5 +151,17 @@ public class HomeActivity extends AppCompatActivity {
             Log.e(TAG, e.toString());
         }
     };
+
+/*
+    @Override
+    int getContentViewId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    int getNavigationMenuItemId() {
+        return R.id.action_home;
+    }
+*/
 
 }
