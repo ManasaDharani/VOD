@@ -11,23 +11,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom" />
 
-    <ScrollView
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Test"
-            android:textSize="15sp"
-            />
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello"
+        app:layout_anchor="@+id/listView"
+        app:layout_anchorGravity="top|center" />
 
-        </LinearLayout>
-
-    </ScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
