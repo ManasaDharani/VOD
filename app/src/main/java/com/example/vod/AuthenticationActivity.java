@@ -3,6 +3,7 @@ package com.example.vod;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -13,7 +14,7 @@ import com.amazonaws.mobile.client.SignInUIOptions;
 import com.amazonaws.mobile.client.UserStateDetails;
 
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
+
 
 public class AuthenticationActivity extends AppCompatActivity {
 
@@ -49,6 +50,15 @@ public class AuthenticationActivity extends AppCompatActivity {
         switch (userStateDetails.getUserState()){
             case SIGNED_IN:
                 Intent i = new Intent(AuthenticationActivity.this, HomeActivity.class);
+                try {
+                    String name = AWSMobileClient.getInstance().getUserAttributes().get("given_name");
+                    String username = AWSMobileClient.getInstance().getUsername();
+                    SharedPreferences prefs = getSharedPreferences("VOD", MODE_PRIVATE);
+                    prefs.edit().putString("name", name).apply();
+                    prefs.edit().putString("username", username).apply();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 startActivity(i);
                 break;
             case SIGNED_OUT:

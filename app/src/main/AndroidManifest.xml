@@ -22,8 +22,8 @@
 
         </activity>
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/action_settings" />
+            android:name=".ProfileActivity"
+            android:label="@string/action_profile" />
         <activity android:name=".VideoPlayerActivity" />
         <activity android:name=".UploadVideoActivity" />
 

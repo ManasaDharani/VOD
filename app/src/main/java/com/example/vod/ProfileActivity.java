@@ -1,6 +1,7 @@
 package com.example.vod;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,14 +18,14 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class SettingsActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     String[] items = new String[]{"Sign Out"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
+        setContentView(R.layout.profile_activity);
 
         ListView listView = findViewById(R.id.listView);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -33,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
         listView.setOnItemClickListener((parent, view, position, id) -> {
             if (items[position] == "Sign Out") {
                 AWSMobileClient.getInstance().signOut();
-                Intent authIntent = new Intent(SettingsActivity.this, AuthenticationActivity.class);
+                Intent authIntent = new Intent(ProfileActivity.this, AuthenticationActivity.class);
                 finish();
                 startActivity(authIntent);
             }
@@ -43,27 +44,27 @@ public class SettingsActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.action_home:
-                    Intent a = new Intent(SettingsActivity.this,HomeActivity.class);
+                    Intent a = new Intent(ProfileActivity.this,HomeActivity.class);
                     startActivity(a);
                     overridePendingTransition(0,0);
                     break;
-                case R.id.action_settings:
+                case R.id.action_profile:
                     break;
                 case R.id.action_activity3:
-                    Intent b = new Intent(SettingsActivity.this,Activity3.class);
+                    Intent b = new Intent(ProfileActivity.this,Activity3.class);
                     startActivity(b);
                     overridePendingTransition(0,0);
                     break;
             }
             return true;
         });
-        MenuItem item = navigation.getMenu().findItem(R.id.action_settings);
+        MenuItem item = navigation.getMenu().findItem(R.id.action_profile);
         item.setChecked(true);
 
-        Intent intent = getIntent();
-        String uname = intent.getStringExtra("username");
+        SharedPreferences prefs = getSharedPreferences("VOD", MODE_PRIVATE);
+        String name = prefs.getString("name", "UNKNOWN");
         TextView welcome = findViewById(R.id.welcome);
-        String welcomeString = "Welcome"+uname;
+        String welcomeString = "Welcome "+name+"!";
         welcome.setText(welcomeString);
     }
 

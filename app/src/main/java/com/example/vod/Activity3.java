@@ -24,8 +24,8 @@ public class Activity3 extends AppCompatActivity {
                     startActivity(a);
                     overridePendingTransition(0,0);
                     break;
-                case R.id.action_settings:
-                    Intent b = new Intent(Activity3.this,SettingsActivity.class);
+                case R.id.action_profile:
+                    Intent b = new Intent(Activity3.this,ProfileActivity.class);
                     startActivity(b);
                     overridePendingTransition(0,0);
                     break;

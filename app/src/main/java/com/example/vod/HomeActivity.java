@@ -43,8 +43,6 @@ public class HomeActivity extends AppCompatActivity {
     private ArrayList<ListVideosQuery.Item> mVideos;
     private final String TAG = HomeActivity.class.getSimpleName();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,8 +98,8 @@ public class HomeActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.action_home:
                     break;
-                case R.id.action_settings:
-                    Intent a = new Intent(HomeActivity.this,SettingsActivity.class);
+                case R.id.action_profile:
+                    Intent a = new Intent(HomeActivity.this,ProfileActivity.class);
                     startActivity(a);
                     overridePendingTransition(0,0);
                     break;
