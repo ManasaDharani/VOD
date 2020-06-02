@@ -9,7 +9,7 @@
             android:checkable="true"/>
         <item android:id="@+id/action_profile"
             android:title="Profile"
-            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:icon="@drawable/ic_person_black_24dp"
             app:showAsAction="ifRoom"
             android:checkable="true"/>
         <item android:id="@+id/action_activity3"

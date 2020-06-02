@@ -53,9 +53,11 @@ public class AuthenticationActivity extends AppCompatActivity {
                 try {
                     String name = AWSMobileClient.getInstance().getUserAttributes().get("given_name");
                     String username = AWSMobileClient.getInstance().getUsername();
+                    String email = AWSMobileClient.getInstance().getUserAttributes().get("email");
                     SharedPreferences prefs = getSharedPreferences("VOD", MODE_PRIVATE);
                     prefs.edit().putString("name", name).apply();
                     prefs.edit().putString("username", username).apply();
+                    prefs.edit().putString("email", email).apply();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

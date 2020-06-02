@@ -20,12 +20,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    String[] items = new String[]{"Sign Out"};
+    String[] items = new String[]{"Username", "Email", "Sign Out"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
+
+        SharedPreferences prefs = getSharedPreferences("VOD", MODE_PRIVATE);
+        String name = prefs.getString("name", "UNKNOWN");
+        TextView welcome = findViewById(R.id.welcome);
+        String welcomeString = "Welcome "+name+"!";
+        welcome.setText(welcomeString);
+        items[0] = "Username: "+prefs.getString("username", "UNKNOWN");
+        items[1] = "Email: "+prefs.getString("email", "UNKNOWN");
 
         ListView listView = findViewById(R.id.listView);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -61,11 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
         MenuItem item = navigation.getMenu().findItem(R.id.action_profile);
         item.setChecked(true);
 
-        SharedPreferences prefs = getSharedPreferences("VOD", MODE_PRIVATE);
-        String name = prefs.getString("name", "UNKNOWN");
-        TextView welcome = findViewById(R.id.welcome);
-        String welcomeString = "Welcome "+name+"!";
-        welcome.setText(welcomeString);
+
     }
 
 /*
